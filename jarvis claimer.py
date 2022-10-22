@@ -25,7 +25,8 @@ while True:
         print("Nieuwe review gevonden!")
         review_id = r.json()[0]['id']
         r = s.post('https://roc-utrecht.jarvis.bit-academy.nl/api/v1/reviews/' +
-                   review_id + '/assign', cookies=cookies, json={"id":"76192725-69f5-41e3-a7ad-ef71e068adcf"}, headers=headers)
+                   # EIGEN ID HIER TOEVOEGEN # EIGEN ID HIER TOEVOEGEN # EIGEN ID HIER TOEVOEGEN # EIGEN ID HIER TOEVOEGEN # EIGEN ID HIER TOEVOEGEN
+                   review_id + '/assign', cookies=cookies, json={"id":"EIGEN ID HIER"}, headers=headers) # EIGEN ID HIER TOEVOEGEN
         print(r.text)
         if doubl == "doubl":
             print("Review geclaimed")
