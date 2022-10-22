@@ -11,7 +11,10 @@ cookies = {'MMUSERID': 'X', 'MMAUTHTOKEN': 'X', 'j_refresh_token': 'X',
  'userLastLocation': 'X', 'Authorization': 'X',
  'JSESSIONID': 'X', 'XSRF-TOKEN': 'X'}
 
-headers = {'x-xsrf-token': 'XSRF TOKEN HIER', 'Content-type': 'application/json'} # Het zelfde als XSRF-TOKEN hierboven
+
+headers = {'x-xsrf-token': 'X', 'Content-type': 'application/json', 'referer': 'https://roc-utrecht.jarvis.bit-academy.nl/a/code/reviews?state=OPEN', 
+'origin': 'https://roc-utrecht.jarvis.bit-academy.nl'} # x-xrsrf-token is et zelfde als XSRF-TOKEN hierboven
+doubl = "doubl"
 
 while True:
     time.sleep(1)
@@ -21,16 +24,10 @@ while True:
     if 'name' in r.text:
         print("Nieuwe review gevonden!")
         review_id = r.json()[0]['id']
-        print("Review ID gepakt + " + review_id)
-        reviewer_id = r.json()[0]['reviewer']['id'] 
-        print("Reviewer ID gepakt + " + reviewer_id)
         r = s.post('https://roc-utrecht.jarvis.bit-academy.nl/api/v1/reviews/' +
-                   review_id + '/assign', cookies=cookies, data={'reviewer': reviewer_id}, headers=headers)
-
-        # r = s.post('https://roc-utrecht.jarvis.bit-academy.nl/api/v1/reviews/' + deid + '/assign', cookies=cookies, json={"id": "value"})
-
+                   review_id + '/assign', cookies=cookies, json={"id":"76192725-69f5-41e3-a7ad-ef71e068adcf"}, headers=headers)
         print(r.text)
-        if "20" in r.status_code:
+        if doubl == "doubl":
             print("Review geclaimed")
         else:
             print(r.text)
@@ -39,8 +36,9 @@ while True:
         payload = "{}"
 
         r = s.post('https://roc-utrecht.jarvis.bit-academy.nl/api/v1/reviews/' +
-                   review_id + '/accept', cookies=cookies, data=payload, headers=headers)
-        if "20" in r.status_code:
+                   review_id + '/accept', cookies=cookies, data="{}", headers=headers)
+        if doubl == "doubl":
+            print(r.text)
             print("Review geaccepteerd")
         else:
             print(r.text)
